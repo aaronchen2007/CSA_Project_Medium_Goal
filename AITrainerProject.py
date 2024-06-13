@@ -20,19 +20,19 @@ while True:
     if len(lmList) != 0:
         angle = detector.findAngle(img, 12, 14, 16, text=False)
         per = np.interp(angle, (50,150),(0,100))
-        bar = np.interp(angle, (220, 310), (650, 100))
+        bar = np.interp(angle, (50, 150), (650, 100))
 
         print(angle,per)
 
         # Check for the curls
         if per == 100:
-            if dir == 0:
-                count += 0.5
-                dir = 1
-        if per == 0:
             if dir == 1:
                 count += 0.5
                 dir = 0
+        if per == 0:
+            if dir == 0:
+                count += 0.5
+                dir = 1
         print(count)
 
         cv2.rectangle(img, (1100, 100), (1175, 650), (0, 255, 0), 3)
